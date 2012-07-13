@@ -1,0 +1,41 @@
+<h3 style = "text-align: center">Create Challenge</h3>
+<div class = "row">
+	<div class = "twelve columns centered">
+		<% var left = true; %>
+		<% for (i = 0; i < friends.length; i++) { %>
+			<% if (left) { %>
+			<% left = false; %>
+				<div class = "row">
+					<div class = "six columns">
+						<div class = "row panel">
+							<div class = "three columns mobile-one">
+								<img src="https://graph.facebook.com/<%= friends[i]["id"] %>/picture"/>
+							</div>
+							<div class = "three columns mobile-one" style = "text-align: center">
+								<%= friends[i]["name"] %>
+							</div>
+							<div class = "six columns mobile-two">
+								<button id = "friend" type = "button" class = "primary button" style = "width: 100%" value = "<%= i %>">Challenge</button>
+							</div>
+						</div>
+					</div>
+			<% } else { %>
+			<% left = true; %>
+					<div class = "six columns">
+						<div class = "row panel">
+							<div class = "three columns mobile-one">
+								<img src="https://graph.facebook.com/<%= friends[i]["id"] %>/picture"/>
+							</div>
+							<div class = "three columns mobile-one" style = "text-align: center">
+								<%= friends[i]["name"] %>
+							</div>
+							<div class = "six columns mobile-two">
+								<button id = "friend" type = "button" class = "primary button" style = "width: 100%" value = "<%= i %>">Challenge</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
+	</div>
+</div>

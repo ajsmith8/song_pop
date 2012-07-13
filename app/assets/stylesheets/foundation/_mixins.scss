@@ -1,0 +1,81 @@
+  // Font size mixin to include px and rem
+
+  @mixin font-size($size, $is-important: false) {
+    @if $is-important {
+      font-size: $size + px !important;
+      font-size: ($size / 10) + rem !important;
+    } @else {
+      font-size: $size + px;
+      font-size: ($size / 10) + rem;
+    }
+  }
+
+  // Grid Calculation for Percentages
+
+  @function gridCalc($colNumber, $totalColumns) {
+    @return percentage(($colNumber / $totalColumns));
+  }
+
+  // Default Font Stack
+
+  @mixin defaultFontFamily {
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  }
+
+  // Create CSS Triangles in a Breeze
+
+  @mixin cssTriangle($triangleSize, $triangleColor, $triangleDirection) {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: solid   $triangleSize;
+    @if ($triangleDirection == top) {
+      border-color: $triangleColor transparent transparent transparent;
+    }
+    @if ($triangleDirection == bottom) {
+      border-color: transparent transparent $triangleColor transparent;
+    }
+    @if ($triangleDirection == left) {
+      border-color: transparent transparent transparent $triangleColor;
+    }
+    @if ($triangleDirection == right) {
+      border-color: transparent $triangleColor transparent transparent;
+    }
+    // .example { @include css-triangle(5px, #fff, bottom); }
+  }
+
+@mixin gradients($color) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from( lighten($color, 10%) /*{start}*/), to( darken($color, 10%) /*{end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/);
+}
+
+@mixin reverse-gradients($color) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from( darken($color, 10%) /*{start}*/), to( lighten($color, 10%) /*{end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( darken($color, 10%) /*{start}*/, lighten($color, 10%) /*{end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( darken($color, 10%) /*{start}*/, lighten($color, 10%) /*{end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( darken($color, 10%) /*{start}*/, lighten($color, 10%) /*{end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( darken($color, 10%) /*{start}*/, lighten($color, 10%) /*{end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( darken($color, 10%) /*{start}*/, lighten($color, 10%) /*{end}*/);
+}
+
+@mixin progress-bars($color, $height) {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: $height; 
+	background: $color; 
+	border: 1px solid darken(($color), 15%); 
+	color: $white; 
+	cursor: pointer; 
+	display: inline-block;  
+	line-height: 1; 
+	margin: 0; 
+	outline: none;  
+	margin-bottom: $btnBase;
+	text-align: center;
+}

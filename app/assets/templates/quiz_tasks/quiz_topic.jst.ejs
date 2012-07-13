@@ -1,0 +1,17 @@
+<div class = "row">
+	<div class = "eight columns centered mobile-four">
+		<div class = "row panel">
+			<h4 style = "text-align: center"><%= topic.get('title') %></h4>
+			<div class = "tweleve columns mobile-four" style = "text-align: center">
+				<h6><%= topic.get('description') %></h6>
+			</div>
+			<div class = "tweleve columns mobile-four" style = "text-align: center; margin-top: 2em">
+				<a href = "<%= topic.get('source_url') %>"><%= topic.get('source_url') %></a>
+			</div>
+			<div class = "tweleve columns mobile-four" style = "width: 100%; margin-top: 2em">
+				<button id = "next" type = "button" class = "success button" style = "width: 100%">Quiz Me</button>
+				<button id = "study_guide" type = "button" class = "primary button" style = "width: 100%">Study Guide</button>
+			</div>
+		</div>
+	</div>
+</div>
