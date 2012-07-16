@@ -55,7 +55,11 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 	
 	selectChallengeTopic: function(id) {
 		var view = new SongPop.Views.QuizTasksSelectChallengeTopic({
-			
+			topics: this.topics,
+			challenges: this.challenges,
+			challenge: this.challenges.where({id: parseInt(id)})[0],
+			current_user: this.current_user,
+			reasons: this.reasons
 		});
 		$('#page').html(view.render().el);
 	},
@@ -112,7 +116,11 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 			challenge: this.challenges.where({id: parseInt(id)})[0],
 			users: this.users,
 			challenge_scores: this.challenge_scores,
-			current_user: this.current_user
+			current_user: this.current_user,
+			reasons: this.reasons,
+			topics: this.topics,
+			quiz_qs: this.quiz_qs,
+			quiz_tasks: this.quiz_tasks
 		});
 		$('#page').html(view.render().el);
 	},

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713163118) do
+ActiveRecord::Schema.define(:version => 20120713215920) do
 
   create_table "challenge_scores", :force => true do |t|
     t.integer  "a_id"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20120713163118) do
     t.datetime "updated_at",                          :null => false
     t.integer  "challenger_score", :default => 0
     t.integer  "user_score",       :default => 0
-    t.integer  "time_created"
     t.boolean  "is_finished",      :default => false
+    t.integer  "time_created"
   end
 
   create_table "quiz_qs", :force => true do |t|

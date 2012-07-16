@@ -8,6 +8,8 @@ SongPop.Views.QuizTasksCreateChallenge = Backbone.View.extend({
 	
 	render: function() {
 		this.arrangeFriends();
+		this.user = this.options.users.create();
+		this.challenge = this.options.challenges.create();
 		$(this.el).html(this.template({
 			friends: this.options.friends
 		}));
@@ -20,38 +22,28 @@ SongPop.Views.QuizTasksCreateChallenge = Backbone.View.extend({
 		var users = this.options.users;
 		var challenges = this.options.challenges;
 		var current_time = new Date();
-		var new_challenge, new_user;
+		var new_challenge = this.challenge;
 		
 		if (users.where({uid: friend['id']})[0] && !(users.where({uid: friend['id']})[0].get('is_temp_user'))) {
 			var user = users.where({uid: friend['id']})[0];
-			new_challenge = challenges.create({challenger_id: current_user.get('id'), user_id: user.get('id'), time_created: current_time.getTime()});
+			new_challenge.set({challenger_id: current_user.get('id'), user_id: user.get('id'), time_created: current_time.getTime()});
+			new_challenge.save();
 			Backbone.history.navigate('create/t/' + new_challenge.get('id'), true);
 		} else {
-			if (users.where({uid: friend['id']})[0]) {
-				new_user = users.where({uid: friend['id']})[0];
-			} else {
-				var name = friend['name'].split(' ');
-				new_user = users.create({uid: friend['id'], provider: 'facebook', name: friend['name'], first_name: name[0], last_initial: name[1][0].toUpperCase()});
-			}
-			this.feedPost(new_user);
+			this.newUserChallenge(friend);
 		}
 	},
 	
 	feedPost: function(user) {
 		var current_user = this.options.current_user;
-		var challenges = this.options.challenges;
-		var users = this.options.users;
-		var current_time = new Date();
-		var new_challenge;
         var obj = { method: 'feed', link: 'http://www.fusegap.com', name: 'fuseGap', to: user['id'], from: current_user.get('uid')};
 
 		function callback(response) 
 		{
 			if (!response) {
-
+				
 			} else {
-       			new_challenge = challenges.create({challenger_id: current_user.get('id'), user_id: user.get('id'), time_created: current_time.getTime()});
-				Backbone.history.navigate('create/t/' + new_challenge.get('id'), true);
+				this.newUserChallenge(user);
 			}
         }
 		FB.ui(obj, callback);
@@ -87,5 +79,25 @@ SongPop.Views.QuizTasksCreateChallenge = Backbone.View.extend({
 			}
 			return 0;
 		});
+	},
+	
+	newUserChallenge: function(user) {
+		var new_user = this.user, new_challenge = this.challenge;
+		var users = this.options.users;
+		var current_user = this.options.current_user;
+		var challenges = this.options.challenges;
+		var current_time = new Date();
+		
+		if (users.where({uid: user['id']})[0]) {
+			new_user = users.where({uid: user['id']})[0];
+		} else {
+			var name = user['name'].split(' ');
+			new_user.set({uid: user['id'], provider: 'facebook', name: user['name'], first_name: name[0], last_initial: name[1][0].toUpperCase()});
+			new_user.save();
+		}
+		
+		new_challenge.set({challenger_id: current_user.get('id'), user_id: new_user.get('id'), time_created: current_time.getTime()});
+		new_challenge.save();
+		Backbone.history.navigate('create/t/' + new_challenge.get('id'), true);
 	}
 });

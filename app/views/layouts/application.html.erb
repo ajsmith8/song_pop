@@ -6,6 +6,7 @@
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script type="text/javascript">if (window.location.hash == '#_=_')window.location.hash = '';</script>
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script type = "text/javascript">
 		window.addEventListener("load", function() {
@@ -15,7 +16,7 @@
 		});
 
 		window.fbAsyncInit = function() {
-			FB.init({appId: '430430590318322', channelUrl: 'http://high-lightning-4791.herokuapp.com', status: true, xfbml: true});
+			FB.init({appId: '282324831851627', channelUrl: 'http://localhost:3000', status: true, xfbml: true});
 		};
 
 		(function(d){

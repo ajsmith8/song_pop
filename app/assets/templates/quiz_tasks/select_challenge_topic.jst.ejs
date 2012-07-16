@@ -1,6 +1,32 @@
-<h3 style = "text-align: center">Select Challenge Topic</h3>
 <div class = "row">
-	<div class = "four columns centered">
-		<button id = "topic" type = "button" class = "button" style = "width: 100%">A Topic</button>
+	<div class = "twelve columns centered">
+		<% var left = true; %>
+		<% for (i = 0; i < topics.length; i++) { %>
+			<% if (left) { %>
+			<% left = false; %>
+				<div class = "row">
+					<div class = "six columns">
+						<div class = "row panel">
+							<div class = "twelve columns mobile-four">
+								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
+									<%= topics[i].get('title') %>
+								</button>
+							</div>
+						</div>
+					</div>
+			<% } else { %>
+			<% left = true; %>
+					<div class = "six columns">
+						<div class = "row panel">
+							<div class = "twelve columns mobile-four">
+								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
+									<%= topics[i].get('title') %>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
 	</div>
 </div>

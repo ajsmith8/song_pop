@@ -79,8 +79,12 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 		
 		function callback(response) 
 		{
-			challenge.set({time_created: currentTime.getTime()});
-			challenge.save();
+			if (!response) {
+				document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+			} else {
+				challenge.set({time_created: currentTime.getTime()});
+				challenge.save();
+			}
         }
 		FB.ui(obj, callback);
 		this.render();
