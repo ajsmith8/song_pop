@@ -1,28 +1,28 @@
 <% if (correct) { %>
 	<div class = "row">
-		<div class = "eight columns centered mobile-four">
+		<div class = "eight columns centered mobile-six">
 			<div class = "row panel">
-				<div class = "tweleve columns mobile-four" style = "text-align: center; width: 100%">
+				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%">
 					<h5>Good Job!</h5>
 				</div>
-				<div class = "tweleve columns mobile-four" style = "text-align: center; margin-top: 2em; width: 100%">
+				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; width: 100%">
 					<%= 'You got ' + points + ' points' %>
 				</div>
-				<div class = "twelve columns mobile-four" id = "progress_bars" style = "margin-bottom: 2em"></div>
+				<div class = "twelve columns mobile-six" id = "progress_bars" style = "margin-bottom: 2em"></div>
 			</div>
 		</div>
 	</div>
 <% } else { %>
 	<div class = "row">
-		<div class = "eight columns centered mobile-four">
+		<div class = "eight columns centered mobile-six">
 			<div class = "row panel">
-				<div class = "tweleve columns mobile-four" style = "text-align: center; width: 100%">
+				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%">
 					<h5>You Fail...</h5>
 				</div>
-				<div class = "tweleve columns mobile-four" style = "text-align: center; margin-top: 2em; width: 100%">
+				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; width: 100%">
 					<%= 'The correct answer was: ' + quiz_q.get('correct') %>
 				</div>
-				<div class = "twelve columns mobile-four" id = "progress_bars" style = "margin-bottom: 2em"></div>
+				<div class = "twelve columns mobile-six" id = "progress_bars" style = "margin-bottom: 2em"></div>
 			</div>
 		</div>
 	</div>

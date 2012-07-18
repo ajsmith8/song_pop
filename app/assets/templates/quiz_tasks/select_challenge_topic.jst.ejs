@@ -5,9 +5,9 @@
 			<% if (left) { %>
 			<% left = false; %>
 				<div class = "row">
-					<div class = "six columns">
+					<div class = "six columns mobile-six">
 						<div class = "row panel">
-							<div class = "twelve columns mobile-four">
+							<div class = "twelve columns mobile-six">
 								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
 									<%= topics[i].get('title') %>
 								</button>
@@ -16,9 +16,9 @@
 					</div>
 			<% } else { %>
 			<% left = true; %>
-					<div class = "six columns">
+					<div class = "six columns mobile-six">
 						<div class = "row panel">
-							<div class = "twelve columns mobile-four">
+							<div class = "twelve columns mobile-six">
 								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
 									<%= topics[i].get('title') %>
 								</button>

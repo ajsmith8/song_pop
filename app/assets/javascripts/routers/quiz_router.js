@@ -9,7 +9,7 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 		'quiz_q/:id' 		: 'quizQuestion',
 		'quiz_q/:id/ans' 	: 'quizQuestionAnswered',
 		'results/:id' 		: 'quizResults',
-		'source' 			: 'quizQuestionSource',
+		'source/:id' 		: 'quizQuestionSource',
 		
 	},
 	
@@ -22,15 +22,13 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 		this.quiz_qs = options.quiz_qs;
 		this.quiz_tasks = options.quiz_tasks;
 		this.challenges = options.challenges;
-		this.challenge_scores = options.challenge_scores;
 	},
 	
 	home: function() {
 		var view = new SongPop.Views.QuizTasksHome({
 			current_user: this.current_user,
 			challenges: this.challenges,
-			users: this.users,
-			challenge_scores: this.challenge_scores
+			users: this.users
 		});
 		$('#page').html(view.render().el);
 	},
@@ -106,7 +104,6 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 		var view = new SongPop.Views.QuizTasksQuizResults({
 			challenge: this.challenges.where({id: parseInt(id)})[0],
 			users: this.users,
-			challenge_scores: this.challenge_scores,
 			current_user: this.current_user,
 			reasons: this.reasons,
 			topics: this.topics,
@@ -117,9 +114,9 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 		$('#page').html(view.render().el);
 	},
 	
-	quizQuestionSource: function() {
+	quizQuestionSource: function(id) {
 		var view = new SongPop.Views.QuizTasksQuizQuestionSource({
-			
+			source: this.sources.where({id: parseInt(id)})[0]
 		});
 		$('#page').html(view.render().el);
 	}

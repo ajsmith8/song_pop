@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717195527) do
-
-  create_table "challenge_scores", :force => true do |t|
-    t.integer  "a_id"
-    t.integer  "b_id"
-    t.integer  "a_wins"
-    t.integer  "b_wins"
-    t.integer  "ties"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120718224934) do
 
   create_table "challenges", :force => true do |t|
     t.integer  "t_id"

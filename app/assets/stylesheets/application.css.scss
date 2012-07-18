@@ -117,3 +117,12 @@
 	font-weight: bold; 
 	text-shadow: 0px 1px 1px rgba(#000, 0.5);
 }
+
+.darken-ans {
+	opacity: 0.35;
+	filter: alpha(opacity = 35);
+}
+
+.highlight-ans {
+	box-shadow: 0px 0px 20px rgba(255,255,0,0.75);
+}

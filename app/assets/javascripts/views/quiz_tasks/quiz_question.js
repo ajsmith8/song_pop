@@ -3,14 +3,18 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 	template: JST['quiz_tasks/quiz_question'],
 	
 	events: {
-		'click #answer' : 'quizQuestionAnswered'
+		'click #answer0' : 'answerZero',
+		'click #answer1' : 'answerOne',
+		'click #answer2' : 'answerTwo',
+		'click #answer3' : 'answerThree',
+		'click #answer4' : 'answerFour'
 	},
 	
 	render: function() {
 		this.time = 10;
 		var that = this;
 		this.getQuizQ();
-		setTimeout(function() {that.timer();}, 5000);
+		setTimeout(function() {that.timer();}, 7500);
 		$(this.el).html(this.template({
 			quiz_q: this.quiz_q,
 			answers: this.answers
@@ -19,13 +23,13 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 		return this;
 	},
 	
-	quizQuestionAnswered: function() {
+	quizQuestionAnswered: function(num) {
 		this.is_answered = true;
 		var challenge = this.options.challenge;
 		var current_user = this.options.current_user;
 		var time = Math.round((10 - this.time) * 10) / 10;
 		
-		this.assignAnswer(this.answers[parseInt($(event.target).val())]);
+		this.assignAnswer(this.answers[num]);
 		this.options.quiz_tasks.create({
 			t_id: this.options.challenge.get('t_id'),
 			reason_id: this.options.challenge.get('reason_id'),
@@ -70,6 +74,7 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 			this.player_time = this.options.quiz_tasks.where({user_id: player.get('id'), quiz_q_id: this.quiz_q.get('id')})[0].get('time');
 			this.player_uid = player.get('uid');
 		}
+		this.setTimeInterval(this.answers.length);
 	},
 	
 	shuffleAnswers: function() {
@@ -114,22 +119,27 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 	},
 	
 	timer: function() {
-		var inter, count;
+		var inter, count, inter_count;
 		var running = false;
 		var that = this;
 		var current_user = this.options.current_user;
 		var challenge = this.options.challenge;
-		
+
 		if (!running) { 
 			running = true;
 			count = 100;
 			that.time = 10;
+			inter_count = 0;
 			
 			function run() {
 				if (current_user.get('id') === challenge.get('user_id')) {
 					if (Math.round((10 - that.time) * 10) / 10 === that.player_time) {
 						that.showPlayer();
 					}
+				}
+				if (that.interval[inter_count] === Math.round(that.time *10) / 10) {
+					that.eliminateAnswer(inter_count);
+					inter_count = inter_count + 1;
 				}
 				count = count - 1;
 				that.time = that.time - 0.1;
@@ -138,6 +148,11 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 				if (that.stopTimer(count)) {
 					clearInterval(inter);
 					running = false;
+					if (current_user.get('id') === challenge.get('user_id')) {
+						if (Math.round((10 - that.time) * 10) / 10 === that.player_time) {
+							that.showPlayer();
+						}
+					}
 				}
 			}
 			inter = setInterval(run, 100);		
@@ -201,11 +216,51 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 				elements = document.getElementsByTagName('button');
 				for (j = 0; j < elements.length; j++) {
 					if (parseInt($(elements[j]).val()) === i) {
-						var source = '<img src="https://graph.facebook.com/' + String(uid) + '/picture"/>'
+						$(elements[j]).addClass('highlight-ans');
+						var source = '<img src="https://graph.facebook.com/' + String(uid) + '/picture" height = "25px" width = "25px"/>'
 						$(elements[j]).find('#pic').html(source);
 					}
 				}
 			}
 		}
+	},
+	
+	answerZero: function() {
+		this.quizQuestionAnswered(0);
+	},
+	
+	answerOne: function() {
+		this.quizQuestionAnswered(1);
+	},
+	
+	answerTwo: function() {
+		this.quizQuestionAnswered(2);
+	},
+	
+	answerThree: function() {
+		this.quizQuestionAnswered(3);
+	},
+	
+	answerFour: function() {
+		this.quizQuestionAnswered(4);
+	},
+	
+	eliminateAnswer: function(num) {
+		var answers = this.answers;
+		var quiz_q = this.quiz_q;
+		
+		for (i = 0; i < answers.length; i++) {
+			if (answers[i] === quiz_q.get('wrong' + String(num + 1))) {
+				$('#answer' + String(i)).addClass('darken-ans');
+			}
+		}
+	},
+	
+	setTimeInterval: function(num) {
+		var inter = [];
+		for(i = num; i > 1; i--) {
+			inter.push((Math.round((10 / num) * 10) / 10) * (i - 1));
+		}
+		this.interval = inter;
 	}
 });

@@ -1,10 +1,10 @@
 <% if !signed_in? %>
 	<div class = "row header">
-		<div class = "two columns mobile-one"></div>
+		<div class = "two columns mobile-two"></div>
 		<div class = "eight columns mobile-two" style =  "margin-top: -0.5em">
 			<h4 style = "text-align: center">fuseGap</h4>
 		</div>
-		<div class = "two columns mobile-one"></div>
+		<div class = "two columns mobile-two"></div>
 	</div>
 	<div class = "below-header"></div>
 	<h3 style = "text-align: center">Welcome to fuseGap!</h3>
@@ -13,7 +13,7 @@
 	</br>
 	<div class = "row">
 		<div class = "mobile-one columns"></div>
-		<div class = "four columns centered mobile-two">
+		<div class = "four columns centered mobile-four">
 				<%= link_to("Sign In With Facebook", "/auth/facebook", "type" => "button", "class" => "primary button radius large", "style" => "width: 100%") %>
 		</div>
 		<div class = "mobile-one columns"></div>
@@ -30,8 +30,7 @@
 			"sources": <%= Source.all.to_json %>,
 			"quiz_qs": <%= QuizQ.all.to_json %>,
 			"quiz_tasks": <%= QuizTask.all.to_json %>,
-			"challenges": <%= Challenge.all.to_json %>,
-			"challenge_scores": <%= ChallengeScore.all.to_json %>
+			"challenges": <%= Challenge.all.to_json %>
 		}
 	</script>
 

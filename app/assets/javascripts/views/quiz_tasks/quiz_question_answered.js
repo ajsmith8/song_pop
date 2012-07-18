@@ -41,10 +41,10 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 		points = Math.round(500 + (10 - quiz_task.get('time')) * 450);
 		if (quiz_qs.where({reason_id: challenge.get('reason_id')}).length === quiz_tasks.where({user_id: current_user.get('id'), t_id: challenge.get('t_id'), reason_id: challenge.get('reason_id')}).length) {
 			last_q = true;
-			setTimeout(function() {that.quizResults()}, 5000);
+			setTimeout(function() {that.quizResults()}, 3000);
 		} else {
 			last_q = false;
-			setTimeout(function() {that.nextQuestion()}, 5000);
+			setTimeout(function() {that.nextQuestion()}, 3000);
 		}
 		
 		this.quiz_q = quiz_q;

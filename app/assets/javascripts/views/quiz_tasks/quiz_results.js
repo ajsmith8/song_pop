@@ -4,7 +4,12 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	
 	events: {
 		'click #send_challenge' : 'sendChallenge',
-		'click #new_challenge' : 'newChallenge'
+		'click #new_challenge' : 'newChallenge',
+		'click #source0' : 'sourceZero',
+		'click #source1' : 'sourceOne',
+		'click #source2' : 'sourceTwo',
+		'click #source3' : 'sourceThree',
+		'click #source4' : 'sourceFour'
 	},
 	
 	render: function() {
@@ -70,57 +75,19 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	},
 	
 	updateChallenge: function() {
-		var challenges = this.options.challenge_scores;
-		var users = this.options.users;
-		var record;
-		
-		if (challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0] || challenges.where({b_id: this.me.get('id'), a_id: this.player.get('id')})[0]) {
-			if (challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0]) {
-				record = challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0];
-				if (this.my_points === this.player_points) {
-					record.set({ties: record.get('ties') + 1});
-					record.save();
-				} else {
-					if (this.my_points > this.player_points) {
-						record.set({a_wins: record.get('a_wins') + 1});
-						record.save();
-					} else {
-						record.set({b_wins: record.get('b_wins') + 1});
-						record.save();
-					}
-				}
-			} else {
-				record = challenges.where({b_id: this.me.get('id'), a_id: this.player.get('id')})[0];
-				if (this.my_points === this.player_points) {
-					record.set({ties: record.get('ties') + 1});
-					record.save();
-				} else {
-					if (this.my_points > this.player_points) {
-						record.set({b_wins: record.get('b_wins') + 1});
-						record.save();
-					} else {
-						record.set({a_wins: record.get('a_wins') + 1});
-						record.save();
-					}
-				}
-			}
-		} else {
-			if (this.my_points === this.player_points) {
-				challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 0, b_wins: 0, ties: 1});
-			} else {
-				if (this.my_points > this.player_points) {
-					challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 1, b_wins: 0, ties: 0});
-				} else {
-					challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 0, b_wins: 1, ties: 0});
-				}
-			}
-		}
 		this.challenge.set({is_finished: true});
 		this.challenge.save();
 	},
 	
 	sendChallenge: function() {
-		var obj = { method: 'feed', link: 'http://www.fusegap.com', name: 'fuseGap', to: this.player.get('uid'), from: this.me.get('uid')};
+		var obj = { 
+			method: 'feed', 
+			link: 'http://www.fusegap.com', 
+			name: 'fuseGap', 
+			to: this.player.get('uid'), 
+			from: this.me.get('uid'),
+			description: me.get('name') + " has challenged your knowledge, think you can beat them?"
+		};
 		function callback(response) 
 		{
 			Backbone.history.navigate('', true);
@@ -134,5 +101,29 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 		this.new_challenge.set({challenger_id: this.me.get('id'), user_id: this.player.get('id'), time_created: current_time.getTime()});
 		this.new_challenge.save();
 		Backbone.history.navigate('create/t/' + this.new_challenge.get('id'), true);
+	},
+	
+	sourceZero: function() {
+		this.showSource(0);
+	},
+	
+	sourceOne: function() {
+		this.showSource(1);
+	},
+	
+	sourceTwo: function() {
+		this.showSource(2);
+	},
+	
+	sourceThree: function() {
+		this.showSource(3);
+	},
+	
+	sourceFour: function() {
+		this.showSource(4);
+	},
+	
+	showSource: function(num) {
+		Backbone.history.navigate('source/' + this.questions[num].get('source_id'), true);
 	}
 });

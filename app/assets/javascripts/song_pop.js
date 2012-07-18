@@ -12,7 +12,6 @@ window.SongPop = {
 		this.quiz_qs = new SongPop.Collections.QuizQs(data.quiz_qs);
 		this.quiz_tasks = new SongPop.Collections.QuizTasks(data.quiz_tasks);
 		this.challenges = new SongPop.Collections.Challenges(data.challenges);
-		this.challenge_scores = new SongPop.Collections.ChallengeScores(data.challenge_scores);
 		
 		new SongPop.Routers.QuizRouter({
 			current_user: this.current_user,
@@ -22,8 +21,7 @@ window.SongPop = {
 			sources: this.sources,
 			quiz_qs: this.quiz_qs,
 			quiz_tasks: this.quiz_tasks,
-			challenges: this.challenges,
-			challenge_scores: this.challenge_scores
+			challenges: this.challenges
 		});
 		Backbone.history.start();
 	}

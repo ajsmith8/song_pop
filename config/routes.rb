@@ -1,6 +1,5 @@
 SongPop::Application.routes.draw do
   
-  resources :challenge_scores
   resources :challenges
   resources :quiz_tasks
   resources :users

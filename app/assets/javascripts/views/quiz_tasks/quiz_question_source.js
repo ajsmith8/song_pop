@@ -9,7 +9,7 @@ SongPop.Views.QuizTasksQuizQuestionSource = Backbone.View.extend({
 	
 	render: function() {
 		$(this.el).html(this.template({
-			
+			source: this.options.source
 		}));
 		return this;
 	},

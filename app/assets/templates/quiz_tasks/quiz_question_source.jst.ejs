@@ -1,7 +1,19 @@
-<h3 style = "text-align: center">Quiz Question Source</h3>
 <div class = "row">
-	<div class = "four columns centered">
-		<button id = "back" type = "button" class = "button" style = "width: 100%">Back</button>
-		<button id = "dispute" type = "button" class = "button" style = "width: 100%">Dispute Source</button>
+	<div class = "eight columns centered mobile-six">
+		<div class = "row panel">
+			<div class = "tweleve columns mobile-six" style = "text-align: center">
+				<h6><%= source.get('description') %></h6>
+			</div>
+			<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
+				<% var urls = source.get('url').split(' '); %>
+				<% for (i = 0; i < urls.length; i++) { %>
+					<a href = "<%= urls[i] %>"><%= urls[i] %></a>
+				<% } %>
+			</div>
+			<div class = "tweleve columns mobile-six" style = "width: 100%; margin-top: 2em">
+				<button id = "back" type = "button" class = "primary button" style = "width: 100%">Back</button>
+				<button id = "dispute" type = "button" class = "secondary button" style = "width: 100%">Dispute Source</button>
+			</div>
+		</div>
 	</div>
 </div>

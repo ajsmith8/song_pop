@@ -1,45 +1,45 @@
 </br>
 <% var currentTime = new Date(); %>
 <div class = "row">
-	<div class = "eight columns centered mobile-four">
+	<div class = "eight columns centered mobile-six">
 		<button id = "create" type = "button" class = "success button" style = "width: 100%">Create Challenge</button>
 		<ul>
 			<% for (i = 0; i < challenges.length; i++) { %>
 				<div class = "panel row">
 					<% if (challenges[i].challenge.get('user_id') === current_user.get('id')) { %>
-						<div class = "three columns mobile-one">
+						<div class = "three columns mobile-two">
 							<img src="https://graph.facebook.com/<%= users.where({id: challenges[i].challenge.get('challenger_id')})[0].get('uid') %>/picture"/>
 						</div>
 						<div class = "six columns mobile-two">
 							<div class = "row">
-								<div class = "six columns mobile-two" style = "text-align: left">
+								<div class = "six columns mobile-three" style = "text-align: left">
 									<%= users.where({id: challenges[i].challenge.get('challenger_id')})[0].get('first_name') %>
 								</div>
-								<div class = "six columns mobile-two" style = "text-align: right">Me</div>
-								<div class = "three columns mobile-one" style = "text-align: left"><%= challenges[i].opponent_score %></div>
+								<div class = "six columns mobile-three" style = "text-align: right">Me</div>
+								<div class = "three columns mobile-two" style = "text-align: left"><%= challenges[i].opponent_score %></div>
 								<div class = "six columns mobile-two" style = "text-align: center">:</div>
-								<div class = "three columns mobile-one" style = "text-align: right"><%= challenges[i].my_score %></div>
+								<div class = "three columns mobile-two" style = "text-align: right"><%= challenges[i].my_score %></div>
 							</div>
 						</div>
-						<div class = "three columns mobile-one">
+						<div class = "three columns mobile-two">
 							<button type = "button" class = "success button" style = "width: 100%" id = "play" value = "<%= challenges[i].challenge.get('id') %>">Accept</button>
 						</div>
 					<% } else { %>
-						<div class = "three columns mobile-one">
+						<div class = "three columns mobile-two">
 							<img src="https://graph.facebook.com/<%= users.where({id: challenges[i].challenge.get('user_id')})[0].get('uid') %>/picture"/>
 						</div>
 						<div class = "six columns mobile-two">
 							<div class = "row">
-								<div class = "six columns mobile-two" style = "text-align: left">
+								<div class = "six columns mobile-three" style = "text-align: left">
 									<%= users.where({id: challenges[i].challenge.get('user_id')})[0].get('first_name') %>
 								</div>
-								<div class = "six columns mobile-two" style = "text-align: right">Me</div>
-								<div class = "three columns mobile-one" style = "text-align: left"><%= challenges[i].opponent_score %></div>
+								<div class = "six columns mobile-three" style = "text-align: right">Me</div>
+								<div class = "three columns mobile-two" style = "text-align: left"><%= challenges[i].opponent_score %></div>
 								<div class = "six columns mobile-two" style = "text-align: center">:</div>
-								<div class = "three columns mobile-one" style = "text-align: right"><%= challenges[i].my_score %></div>
+								<div class = "three columns mobile-two" style = "text-align: right"><%= challenges[i].my_score %></div>
 							</div>
 						</div>
-						<div class = "three columns mobile-one">
+						<div class = "three columns mobile-two">
 							<% if (challenges[i].challenge.get('time_created') + 43200000 <= currentTime.getTime()) { %>
 								<button type = "button" class = "primary button" style = "width: 100%" id = "nudge" value = "<%= challenges[i].challenge.get('id') %>">Nudge</button>
 							<% } else { %>

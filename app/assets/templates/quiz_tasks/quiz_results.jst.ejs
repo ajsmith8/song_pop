@@ -1,137 +1,147 @@
 <div class = "row">
-	<div class = "ten columns centered mobile-four">
-		<% if (is_challenge) { %>
-			<div class = "mobile-one columns"></div>
-			<div class = "four columns centered mobile-two panel" style = "margin-bottom: 2em">
-				<div class = "row">
-					<div class = "six columns mobile-two">
-						<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-					</div>
-					<div class = "six columns mobile-two" style = "text-align: center">
-						<h5><%= my_points + ' points'%></h5>
+	<div class = "ten columns centered mobile-six">
+		<div class = "row">
+			<% if (is_challenge) { %>
+				<div class = "mobile-one columns"></div>
+				<div class = "four columns centered mobile-four panel" style = "margin-bottom: 2em">
+					<div class = "row">
+						<div class = "six columns mobile-two">
+							<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+						</div>
+						<div class = "six columns mobile-four" style = "text-align: center">
+							<h6><%= my_points + ' points'%></h6>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class = "mobile-one columns"></div>
-			<div class = "twelve columns mobile-four panel" style = "text-align: center">
-				<h6><%= reason.get('title') %></h6>
-			</div>
-			<div class = "twelve columns mobile-four">
-				<% for (i = 0; i < questions.length; i++) { %>
-					<div class = "row">
-						<button type = "button" class = "small button secondary" style = "width: 100%">
-							<div class = 'eight columns mobile-three'>
-								<%= questions[i].get('question') %>
-							</div>
-							<div class = "four columns mobile-one">
-								<div class = "row">
-									<div class = "four columns mobile-two">
-										<div class ="row">
-										<% if (my_quiz[i].get('answer') === 'correct') { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-												<div style = "background: #00ff00; text-align: center">
-													<%= my_quiz[i].get('time') + 's' %>
+				<div class = "mobile-one columns"></div>
+				<div class = "twelve columns mobile-six panel" style = "text-align: center">
+					<h6><%= reason.get('title') %></h6>
+				</div>
+				<div class = "twelve columns mobile-six">
+					<% for (i = 0; i < questions.length; i++) { %>
+						<div class = "row">
+							<button type = "button" id = "source<%= i %>" class = "tiny button secondary" style = "width: 100%; margin-bottom: 0">
+								<div class = 'ten columns mobile-five'>
+									<%= questions[i].get('question') %>
+								</div>
+								<div class = "two columns mobile-one">
+									<div class = "row">
+										<div class = "four columns mobile-two">
+											<div class ="row">
+											<% if (my_quiz[i].get('answer') === 'correct') { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+													<div style = "background: #00ff00; text-align: center; font-size: 10px">
+														<%= my_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
-											</div>
-										<% } else { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= my_quiz[i].get('time') + 's' %>
+											<% } else { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+													<div style = "text-align: center; background: #ff0000; color: #ff0000">
+														<%= my_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
+											<% } %>
 											</div>
-										<% } %>
 										</div>
 									</div>
 								</div>
-							</div>
-						</button>
-					</div>
+							</button>
+						</div>
+					<% } %>
+				</div>
+				<div class = "twelve columns mobile-six">
+					<button type = "button" id = "send_challenge" class = "primary button" style = "width: 100%; margin-top: 1.5em">Send Challenge</button>
+				</div>
+				</div>
+			<% } else { %>
+				<% var winner = false; %>
+				<% if (my_points > player_points) { %>
+					<% winner = true; %>
 				<% } %>
-			</div>
-			<div class = "twelve columns mobile-four">
-				<button type = "button" id = "send_challenge" class = "primary button" style = "width: 100%">Send Challenge</button>
-			</div>
-			</div>
-		<% } else { %>
-			<div class = "mobile-one columns"></div>
-			<div class = "four columns centered mobile-two panel" style = "margin-bottom: 2em">
-				<div class = "row">
-					<div class = "four columns mobile-one" style = "text-align: left">
-						<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-						<h5><%= my_points + ' points'%></h5>
-					</div>
-					<div class = "four columns mobile-two" style = "text-align: center">
-						<h5>VS</h5>
-					</div>
-					<div class = "four columns mobile-one" style = "text-align: right">
-						<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
-						<h5><%= player_points + ' points'%></h5>
+				<div class = "mobile-one columns"></div>
+				<div class = "four columns centered mobile-four panel" style = "margin-bottom: 2em">
+					<div class = "row">
+						<div class = "four columns mobile-two" style = "text-align: left">
+							<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+							<h6><%= my_points + ' points'%></h6>
+						</div>
+						<div class = "four columns mobile-two" style = "text-align: center">
+							<% if (winner) { %>
+								<h5 style = "margin-top: 1em">You Win!</h5>
+							<% } else { %>
+								<h5 style = "margin-top: 1em">You Fail...</h5>
+							<% } %>
+						</div>
+						<div class = "four columns mobile-two" style = "text-align: right">
+							<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
+							<h6><%= player_points + ' points'%></h6>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class = "mobile-one columns"></div>
-			<div class = "twelve columns mobile-four panel" style = "text-align: center">
-				<h6><%= reason.get('title') %></h6>
-			</div>
-			<div class = "twelve columns mobile-four">
-				<% for (i = 0; i < questions.length; i++) { %>
-					<div class = "row">
-						<button type = "button" class = "small button secondary" style = "width: 100%">
-							<div class = 'eight columns mobile-three'>
-								<%= questions[i].get('question') %>
-							</div>
-							<div class = "four columns mobile-one">
-								<div class = "row">
-									<div class = "six columns mobile-two">
-										<div class ="row">
-										<% if (my_quiz[i].get('answer') === 'correct') { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-												<div style = "background: #00ff00; text-align: center">
-													<%= my_quiz[i].get('time') + 's' %>
+				<div class = "mobile-one columns"></div>
+				<div class = "twelve columns mobile-six panel" style = "text-align: center">
+					<h6><%= reason.get('title') %></h6>
+				</div>
+				<div class = "twelve columns mobile-six">
+					<% for (i = 0; i < questions.length; i++) { %>
+						<div class = "row">
+							<button type = "button" id = "source<%= i %>" class = "tiny button secondary" style = "width: 100%; margin-bottom: 0">
+								<div class = 'ten columns mobile-five'>
+									<%= questions[i].get('question') %>
+								</div>
+								<div class = "two columns mobile-one">
+									<div class = "row">
+										<div class = "six columns mobile-two">
+											<div class ="row">
+											<% if (my_quiz[i].get('answer') === 'correct') { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+													<div style = "background: #00ff00; text-align: center">
+														<%= my_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
-											</div>
-										<% } else { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
-												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= my_quiz[i].get('time') + 's' %>
+											<% } else { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
+													<div style = "text-align: center; background: #ff0000; color: #ff0000">
+														<%= my_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
+											<% } %>
 											</div>
-										<% } %>
 										</div>
-									</div>
-									<div class = "six columns mobile-two">
-										<div class ="row">
-										<% if (player_quiz[i].get('answer') === 'correct') { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
-												<div style = "text-align: center; background: #00ff00">
-													<%= player_quiz[i].get('time') + 's' %>
+										<div class = "six columns mobile-two">
+											<div class ="row">
+											<% if (player_quiz[i].get('answer') === 'correct') { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
+													<div style = "text-align: center; background: #00ff00">
+														<%= player_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
-											</div>
-										<% } else { %>
-											<div style = "text-align: center">
-												<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
-												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= player_quiz[i].get('time') + 's' %>
+											<% } else { %>
+												<div style = "text-align: center; width: 30px">
+													<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
+													<div style = "text-align: center; background: #ff0000; color: #ff0000">
+														<%= player_quiz[i].get('time') + 's' %>
+													</div>
 												</div>
+											<% } %>
 											</div>
-										<% } %>
 										</div>
 									</div>
 								</div>
-							</div>
-						</button>
-					</div>
-				<% } %>
-			</div>
-			<div class = "twelve columns mobile-four">
-				<button type = "button" id = "new_challenge" class = "primary button" style = "width: 100%">New Challenge</button>
-			</div>
-			</div>
-		<% } %>
+							</button>
+						</div>
+					<% } %>
+				</div>
+				<div class = "twelve columns mobile-six">
+					<button type = "button" id = "new_challenge" class = "primary button" style = "width: 100%; margin-top: 1.5em">New Challenge</button>
+				</div>
+				</div>
+			<% } %>
+		</div>
 	</div>
 </div>

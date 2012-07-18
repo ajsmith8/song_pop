@@ -5,12 +5,12 @@
 			<% if (left) { %>
 			<% left = false; %>
 				<div class = "row">
-					<div class = "six columns">
+					<div class = "six columns mobile-six">
 						<div class = "row panel">
-							<div class = "three columns mobile-one">
+							<div class = "three columns mobile-two">
 								<img src="https://graph.facebook.com/<%= friends[i]["id"] %>/picture"/>
 							</div>
-							<div class = "three columns mobile-one" style = "text-align: center">
+							<div class = "three columns mobile-two" style = "text-align: center">
 								<%= friends[i]["name"] %>
 							</div>
 							<div class = "six columns mobile-two">
@@ -20,12 +20,12 @@
 					</div>
 			<% } else { %>
 			<% left = true; %>
-					<div class = "six columns">
+					<div class = "six columns mobile-six">
 						<div class = "row panel">
-							<div class = "three columns mobile-one">
+							<div class = "three columns mobile-two">
 								<img src="https://graph.facebook.com/<%= friends[i]["id"] %>/picture"/>
 							</div>
-							<div class = "three columns mobile-one" style = "text-align: center">
+							<div class = "three columns mobile-two" style = "text-align: center">
 								<%= friends[i]["name"] %>
 							</div>
 							<div class = "six columns mobile-two">
