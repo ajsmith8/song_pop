@@ -25,7 +25,7 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	},
 	
 	setVars: function() {
-		var is_challenge, topic, reason, my_points, player_points, challenge, me, player, quiz_tasks, is_winner;
+		var is_challenge, topic, reason, my_points, player_points, challenge, me, player, quiz_tasks;
 		var questions = [], my_quiz = [], player_quiz = [];
 		challenge = this.options.challenge;
 		topic = this.options.topics.where({id: challenge.get('t_id')})[0];
@@ -38,11 +38,6 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			is_challenge = true;
 			my_points = challenge.get('challenger_score');
 			player_points = challenge.get('user_score');
-			if (my_points > player_points) {
-				is_winner = true;
-			} else {
-				is_winner = false;
-			}
 			player = this.options.users.where({id: challenge.get('user_id')})[0];
 			for (i = 0; i < questions.length; i++) {
 				my_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: me.get('id')})[0]);
@@ -51,11 +46,6 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			is_challenge = false;
 			my_points = challenge.get('user_score');
 			player_points = challenge.get('challenger_score');
-			if (my_points > player_points) {
-				is_winner = true;
-			} else {
-				is_winner = false;
-			}
 			player = this.options.users.where({id: challenge.get('challenger_id')})[0];
 			for (i = 0; i < questions.length; i++) {
 				player_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: player.get('id')})[0]);
@@ -73,8 +63,8 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 		this.topic = topic;
 		this.reason = reason;
 		this.questions = questions;
-		this.is_winner = is_winner;
 		if (!is_challenge) {
+			this.new_challenge = this.options.challenges.create();
 			this.updateChallenge();
 		}
 	},
@@ -82,33 +72,47 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	updateChallenge: function() {
 		var challenges = this.options.challenge_scores;
 		var users = this.options.users;
-		var winner, record;
+		var record;
 		
 		if (challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0] || challenges.where({b_id: this.me.get('id'), a_id: this.player.get('id')})[0]) {
 			if (challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0]) {
 				record = challenges.where({a_id: this.me.get('id'), b_id: this.player.get('id')})[0];
-				if (this.is_winner) {
-					record.set({a_wins: record.get('a_wins') + 1});
+				if (this.my_points === this.player_points) {
+					record.set({ties: record.get('ties') + 1});
 					record.save();
 				} else {
-					record.set({b_wins: record.get('b_wins') + 1});
-					record.save();
+					if (this.my_points > this.player_points) {
+						record.set({a_wins: record.get('a_wins') + 1});
+						record.save();
+					} else {
+						record.set({b_wins: record.get('b_wins') + 1});
+						record.save();
+					}
 				}
 			} else {
 				record = challenges.where({b_id: this.me.get('id'), a_id: this.player.get('id')})[0];
-				if (winner) {
-					record.set({b_wins: record.get('b_wins') + 1});
+				if (this.my_points === this.player_points) {
+					record.set({ties: record.get('ties') + 1});
 					record.save();
 				} else {
-					record.set({a_wins: record.get('a_wins') + 1});
-					record.save();
+					if (this.my_points > this.player_points) {
+						record.set({b_wins: record.get('b_wins') + 1});
+						record.save();
+					} else {
+						record.set({a_wins: record.get('a_wins') + 1});
+						record.save();
+					}
 				}
 			}
 		} else {
-			if (this.is_winner) {
-				challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 1, b_wins: 0});
+			if (this.my_points === this.player_points) {
+				challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 0, b_wins: 0, ties: 1});
 			} else {
-				challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 0, b_wins: 1});
+				if (this.my_points > this.player_points) {
+					challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 1, b_wins: 0, ties: 0});
+				} else {
+					challenges.create({a_id: this.me.get('id'), b_id: this.player.get('id'), a_wins: 0, b_wins: 1, ties: 0});
+				}
 			}
 		}
 		this.challenge.set({is_finished: true});
@@ -125,6 +129,10 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	},
 	
 	newChallenge: function() {
+		var current_time = new Date();
 		
+		this.new_challenge.set({challenger_id: this.me.get('id'), user_id: this.player.get('id'), time_created: current_time.getTime()});
+		this.new_challenge.save();
+		Backbone.history.navigate('create/t/' + this.new_challenge.get('id'), true);
 	}
 });

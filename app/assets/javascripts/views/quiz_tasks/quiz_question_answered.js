@@ -3,11 +3,11 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 	template: JST['quiz_tasks/quiz_question_answered'],
 	
 	events: {
-		'click #next' : 'nextQuestion',
-		'click #done' : 'quizResults'
+
 	},
 	
 	render: function() {
+		var that = this;
 		this.setVars();
 		$(this.el).html(this.template({
 			points: this.points,
@@ -15,6 +15,7 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 			correct: this.correct,
 			last_q: this.last_q
 		}));
+		setTimeout(function() {that.setProgressBars(that.options.quizzes.length);}, 1);
 		return this;
 	},
 	
@@ -29,6 +30,7 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 		var current_user = this.options.current_user;
 		var challenge = this.options.challenge;
 		var quiz_task = _.last(quiz_tasks.where({user_id: current_user.get('id'), t_id: challenge.get('t_id'), reason_id: challenge.get('reason_id')}));
+		var that = this;
 		
 		quiz_q = quiz_qs.where({id: quiz_task.get('quiz_q_id')})[0];
 		if (quiz_task.get('answer') === 'correct') {
@@ -36,11 +38,13 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 		} else {
 			correct = false;
 		}
-		points = Math.round(500 + (10000 - quiz_task.get('time')) * 0.45);
+		points = Math.round(500 + (10 - quiz_task.get('time')) * 450);
 		if (quiz_qs.where({reason_id: challenge.get('reason_id')}).length === quiz_tasks.where({user_id: current_user.get('id'), t_id: challenge.get('t_id'), reason_id: challenge.get('reason_id')}).length) {
 			last_q = true;
+			setTimeout(function() {that.quizResults()}, 5000);
 		} else {
 			last_q = false;
+			setTimeout(function() {that.nextQuestion()}, 5000);
 		}
 		
 		this.quiz_q = quiz_q;
@@ -51,5 +55,42 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 	
 	nextQuestion: function() {
 		Backbone.history.navigate('quiz_q/' + this.options.challenge.get('id'), true);
+	},
+	
+	setProgressBars: function(num) {
+		if (num === 3) {
+			$('#progress_bars').html(JST['quiz_tasks/three_question']);
+			this.fillBars(num);
+		}
+		if (num === 4) {
+			$('#progress_bars').html(JST['quiz_tasks/four_question']);
+			this.fillBars(num);
+		}
+		if (num === 5) {
+			$('#progress_bars').html(JST['quiz_tasks/five_question']);
+			this.fillBars(num);
+		}	
+	},
+	
+	fillBars: function(num) {
+		var quiz_qs = this.options.quizzes;
+		var quiz_tasks = this.options.quiz_tasks;
+		var current_user = this.options.current_user;
+		var challenge = this.options.challenge;
+		var task, time;
+		
+		for (i = 0; i < num; i++) {
+			if (quiz_tasks.where({user_id: current_user.get('id'), quiz_q_id: quiz_qs[i].get('id')})[0]) {
+				task = 	quiz_tasks.where({quiz_q_id: quiz_qs[i].get('id'), user_id: current_user.get('id')})[0];
+				time = task.get('time');
+				if (task.get('answer') === 'correct') {
+					$('#bar_' + String(i + 1)).html(JST['quiz_tasks/success_meter']({time: time}));
+				} else {
+					$('#bar_' + String(i + 1)).html(JST['quiz_tasks/fail_meter']({time: time}));
+				}
+			} else {
+				$('#bar_' + String(i + 1)).html(JST['quiz_tasks/empty_meter']);
+			}
+		}
 	}
 });

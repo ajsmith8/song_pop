@@ -31,14 +31,14 @@
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
 												<div style = "background: #00ff00; text-align: center">
-													<%= Math.round(my_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= my_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } else { %>
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
 												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= Math.round(my_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= my_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } %>
@@ -90,14 +90,14 @@
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
 												<div style = "background: #00ff00; text-align: center">
-													<%= Math.round(my_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= my_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } else { %>
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= me.get('uid') %>/picture"/>
 												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= Math.round(my_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= my_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } %>
@@ -109,14 +109,14 @@
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
 												<div style = "text-align: center; background: #00ff00">
-													<%= Math.round(player_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= player_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } else { %>
 											<div style = "text-align: center">
 												<img src="https://graph.facebook.com/<%= player.get('uid') %>/picture"/>
 												<div style = "text-align: center; background: #ff0000; color: #ff0000">
-													<%= Math.round(player_quiz[i].get('time') / 100) / 10 + 's' %>
+													<%= player_quiz[i].get('time') + 's' %>
 												</div>
 											</div>
 										<% } %>

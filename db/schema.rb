@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713215920) do
+ActiveRecord::Schema.define(:version => 20120717195527) do
 
   create_table "challenge_scores", :force => true do |t|
     t.integer  "a_id"
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(:version => 20120713215920) do
     t.integer  "quiz_q_id"
     t.integer  "user_id"
     t.string   "answer"
-    t.integer  "time"
     t.integer  "score"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "time"
   end
 
   create_table "reasons", :force => true do |t|

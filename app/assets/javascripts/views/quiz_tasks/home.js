@@ -31,8 +31,8 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 	getChallenges: function(array) {
 		var challenges = this.options.challenges;
 		var current_user = this.options.current_user
-		var recieved = challenges.where({user_id: current_user.get('id'), user_score: 0});
-		var sent = challenges.where({challenger_id: current_user.get('id'), user_score: 0});
+		var recieved = challenges.where({user_id: current_user.get('id'), user_score: 0, is_finished: false});
+		var sent = challenges.where({challenger_id: current_user.get('id'), user_score: 0, is_finished: false});
 		
 		this.sortChallenges(recieved);
 		for (i = 0; i < recieved.length; i++) {
@@ -52,7 +52,7 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 	
 	getMatchup: function(challenge, array) {
 		var scores = this.options.challenge_scores;
-		var current_user = this.options.current_user
+		var current_user = this.options.current_user;
 		var matchup;
 		
 		if (scores.where({a_id: current_user.get('id'), b_id: challenge.get('challenger_id')})[0] || scores.where({a_id: challenge.get('challenger_id'), b_id: current_user.get('id')})[0]) {
@@ -80,7 +80,7 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 		function callback(response) 
 		{
 			if (!response) {
-				document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+				
 			} else {
 				challenge.set({time_created: currentTime.getTime()});
 				challenge.save();
