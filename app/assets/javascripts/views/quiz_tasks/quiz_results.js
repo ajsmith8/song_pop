@@ -86,7 +86,7 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			name: 'fuseGap', 
 			to: this.player.get('uid'), 
 			from: this.me.get('uid'),
-			description: me.get('name') + " has challenged your knowledge, think you can beat them?"
+			description: this.me.get('name') + " has challenged your knowledge, think you can beat them?"
 		};
 		function callback(response) 
 		{

@@ -94,7 +94,7 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 			name: 'fuseGap', 
 			to: to_user.get('uid'), 
 			from: this.options.current_user.get('uid'),
-			description: me.get('name') + " has challenged your knowledge, think you can beat them?"
+			description: this.me.get('name') + " has challenged your knowledge, think you can beat them?"
 		};
 		
 		function callback(response) 
