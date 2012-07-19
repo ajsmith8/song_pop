@@ -95,7 +95,8 @@ SongPop.Routers.QuizRouter =  Backbone.Router.extend({
 			quiz_tasks: this.quiz_tasks,
 			challenge: this.challenges.where({id: parseInt(id)})[0],
 			current_user: this.current_user,
-			quiz_qs: this.quiz_qs
+			quiz_qs: this.quiz_qs,
+			sources: this.sources
 		});
 		$('#page').html(view.render().el);
 	},

@@ -2,10 +2,16 @@
 <% var currentTime = new Date(); %>
 <div class = "row">
 	<div class = "eight columns centered mobile-six">
-		<button id = "create" type = "button" class = "success button" style = "width: 100%">Create Challenge</button>
+		<button id = "create" type = "button" class = "radius success button" style = "width: 100%">Create Challenge</button>
 		<ul>
 			<% for (i = 0; i < challenges.length; i++) { %>
-				<div class = "panel row">
+				<% if (i === 0) { %>
+					<div class = "round-top panel row">
+				<% } else  if (i === challenges.length - 1) { %>
+					<div class = "round-bottom panel row">
+				<% } else { %>
+					<div class = "panel row">
+				<% } %>
 					<% if (challenges[i].challenge.get('user_id') === current_user.get('id')) { %>
 						<div class = "three columns mobile-two">
 							<img src="https://graph.facebook.com/<%= users.where({id: challenges[i].challenge.get('challenger_id')})[0].get('uid') %>/picture"/>
@@ -50,6 +56,6 @@
 				</div>
 			<% } %>
 		</ul>
-		<button id = "create" type = "button" class = "success button" style = "width: 100%">Create Challenge</button>
+		<button id = "create" type = "button" class = "radius success button" style = "width: 100%">Create Challenge</button>
 	</div>
 </div>

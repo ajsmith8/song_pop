@@ -1,15 +1,17 @@
 <div class = "row">
-	<div class = "twelve columns centered">
+<div class = "twelve columns">
+<div class = "radius panel row" style = "margin-top: 0.5em; margin-bottom: 0.5em">
+	<div class = "twelve columns">
 		<% var left = true; %>
-		<% for (i = 0; i < topics.length; i++) { %>
+		<% topics.each(function(t) { %>
 			<% if (left) { %>
 			<% left = false; %>
 				<div class = "row">
 					<div class = "six columns mobile-six">
-						<div class = "row panel">
-							<div class = "twelve columns mobile-six">
-								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
-									<%= topics[i].get('title') %>
+						<div class = "row">
+							<div class = "twelve columns mobile-six" style = "margin-bottom: 1em">
+								<button type = "button" class = "radius primary button" value = "<%= t.get('id') %>" id = "topic" style = "width: 100%">
+									<%= t.get('title') %>
 								</button>
 							</div>
 						</div>
@@ -17,16 +19,18 @@
 			<% } else { %>
 			<% left = true; %>
 					<div class = "six columns mobile-six">
-						<div class = "row panel">
-							<div class = "twelve columns mobile-six">
-								<button type = "button" class = "primary button" value = "<%= i %>" id = "topic" style = "width: 100%">
-									<%= topics[i].get('title') %>
+						<div class = "row">
+							<div class = "twelve columns mobile-six" style = "margin-bottom: 1em">
+								<button type = "button" class = "radius primary button" value = "<%= t.get('id') %>" id = "topic" style = "width: 100%">
+									<%= t.get('title') %>
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			<% } %>
-		<% } %>
+		<% }); %>
 	</div>
+</div>
+</div>
 </div>

@@ -25,7 +25,7 @@
 	text-decoration: none; 
 	@include single-transition(background-color, .15s, ease-in-out);
 	margin-bottom: $btnBase;
-	box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 	
     /* Hovers */
     &:hover { color: $white; background-color: darken(($mainColor), 10%); }
@@ -41,29 +41,36 @@
 
     /* Colors */
     &.primary { background-color: $mainColor; border: 1px solid darken(($mainColor), 15%);
-      &:hover { background-color: darken(($mainColor), 10%); @include gradients(darken($mainColor, 10%));}
+      &:hover { background-color: lighten(($mainColor), 10%); @include gradients(lighten($mainColor, 10%));}
       &:focus { @include box-shadow(0 0 4px opacify($mainColor, 0.3), 0 1px 0 $shinyEdge inset); }
-	  &:active { @include reverse-gradients(darken($mainColor, 15%));}
+	  &:active { @include reverse-gradients(darken($mainColor, 10%));}
 	  @include gradients($mainColor);
     }
     &.success { background-color: $successColor; border: 1px solid darken(($successColor), 15%);
-      &:hover { background-color: darken(($successColor), 10%); @include gradients(darken($successColor, 10%));}
+      &:hover { background-color: lighten(($successColor), 10%); @include gradients(lighten($successColor, 10%));}
       &:focus { @include box-shadow(0 0 5px opacify($successColor, 0.4), 0 1px 0 $shinyEdge inset);}
-	  &:active { @include reverse-gradients(darken($successColor, 15%));}
+	  &:active { @include reverse-gradients(darken($successColor, 10%));}
 	  @include gradients($successColor);
     }
     &.alert { background-color: $alertColor; border: 1px solid darken(($alertColor), 15%);
-      &:hover { background-color: darken(($alertColor), 10%); @include gradients(darken($alertColor, 10%)) }
+      &:hover { background-color: lighten(($alertColor), 10%); @include gradients(lighten($alertColor, 10%)) }
       &:focus { @include box-shadow(0 0 4px opacify($alertColor, 0.3), 0 1px 0 $shinyEdge inset); }
-	  &:active { @include reverse-gradients(darken($alertColor, 15%));}
+	  &:active { @include reverse-gradients(darken($alertColor, 10%));}
 	  @include gradients($alertColor);
     }
     &.secondary { background-color: $secondaryColor; color: darken(($secondaryColor), 80%); border: 1px solid darken(($secondaryColor), 15%);
-      &:hover { background-color: darken(($secondaryColor), 10%); @include gradients(darken($secondaryColor, 10%)) }
+      &:hover { background-color: lighten(($secondaryColor), 10%); @include gradients(lighten($secondaryColor, 10%)) }
       &:focus { @include box-shadow(0 0 5px opacify($secondaryColor, 0.5), 0 1px 0 $shinyEdge inset); }
-	  &:active { @include reverse-gradients(darken($secondaryColor, 15%));}
+	  &:active { @include reverse-gradients(darken($secondaryColor, 10%));}
 	  @include gradients($secondaryColor);
+		box-shadow: 0 0 0 rgba(0,0,0,0.5);
     }
+	&.dark { background-color: $headerColor; border: 1px solid darken(($headerColor), 15%);
+      &:hover { background-color: lighten(($headerColor), 10%); @include gradients(lighten($headerColor, 10%)) }
+      &:focus { @include box-shadow(0 0 5px opacify($headerColor, 0.5), 0 1px 0 $shinyEdge inset); }
+	  &:active { @include reverse-gradients(darken($headerColor, 10%));}
+	  @include gradients($headerColor);	
+	}
 
     /* Radii */
     &.radius { @include border-radius($buttonRadius); }

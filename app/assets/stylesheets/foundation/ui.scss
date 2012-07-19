@@ -192,7 +192,7 @@
 
   /* Panels ---------------------- */
 
-  div.panel { background: darken($white, 5%); border: solid 1px darken($white, 10%); margin: 0 0 22px 0; padding: 20px;
+  div.panel { background: darken($white, 5%); border: solid 1px darken($white, 10%); margin: 0 0 22px 0; padding: 20px; box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 
     *:first-child { margin-top: 0; }
     *:last-child { margin-bottom: 0; }

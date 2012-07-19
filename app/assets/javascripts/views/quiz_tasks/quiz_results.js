@@ -45,7 +45,7 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			player_points = challenge.get('user_score');
 			player = this.options.users.where({id: challenge.get('user_id')})[0];
 			for (i = 0; i < questions.length; i++) {
-				my_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: me.get('id')})[0]);
+				my_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: me.get('id'), challenge_id: challenge.get('id')})[0]);
 			}
 		} else {
 			is_challenge = false;
@@ -53,8 +53,8 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			player_points = challenge.get('challenger_score');
 			player = this.options.users.where({id: challenge.get('challenger_id')})[0];
 			for (i = 0; i < questions.length; i++) {
-				player_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: player.get('id')})[0]);
-				my_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: me.get('id')})[0]);
+				player_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: player.get('id'), challenge_id: challenge.get('id')})[0]);
+				my_quiz.push(quiz_tasks.where({quiz_q_id: questions[i].get('id'), user_id: me.get('id'), challenge_id: challenge.get('id')})[0]);
 			}
 		}
 		this.me = me;
@@ -70,13 +70,20 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 		this.questions = questions;
 		if (!is_challenge) {
 			this.new_challenge = this.options.challenges.create();
-			this.updateChallenge();
+			this.updateChallenge(true);
+		} else {
+			this.updateChallenge(false);
 		}
 	},
 	
-	updateChallenge: function() {
-		this.challenge.set({is_finished: true});
-		this.challenge.save();
+	updateChallenge: function(is_finished) {
+		if (is_finished) {
+			this.challenge.set({is_finished: true});
+			this.challenge.save();
+		} else {
+			this.challenge.set({is_ready: true});
+			this.challenge.save();
+		}
 	},
 	
 	sendChallenge: function() {

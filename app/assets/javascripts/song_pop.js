@@ -23,6 +23,13 @@ window.SongPop = {
 			quiz_tasks: this.quiz_tasks,
 			challenges: this.challenges
 		});
+		this.preLoad();
 		Backbone.history.start();
+	},
+	
+	preLoad: function() {
+		for(i = 0; i < 17; i++) {
+			$('<img />').attr('src', '/assets/win' + String(i + 1) + '.png');
+		}
 	}
 };

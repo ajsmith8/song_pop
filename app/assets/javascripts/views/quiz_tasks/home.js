@@ -31,8 +31,8 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 	getChallenges: function(array) {
 		var challenges = this.options.challenges;
 		var current_user = this.options.current_user
-		var recieved = challenges.where({user_id: current_user.get('id'), user_score: 0, is_finished: false});
-		var sent = challenges.where({challenger_id: current_user.get('id'), user_score: 0, is_finished: false});
+		var recieved = challenges.where({user_id: current_user.get('id'), user_score: 0, is_finished: false, is_ready: true});
+		var sent = challenges.where({challenger_id: current_user.get('id'), user_score: 0, is_finished: false, is_ready: true});
 		
 		this.sortChallenges(recieved);
 		for (i = 0; i < recieved.length; i++) {
