@@ -12,7 +12,7 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 	},
 	
 	render: function() {
-		this.time = 10;
+		this.time = 12.5;
 		var that = this;
 		this.getQuizQ();
 		$(this.el).html(this.template({
