@@ -3,21 +3,23 @@
 		<div class = "eight columns centered mobile-six">
 			<div class = "radius row panel" style = "margin-top: 0.5em">
 				<div class = "twelve columns mobile-six" id = "progress_bars" style = "margin-bottom: 2em; margin-top: -2em"></div>
-				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%; margin-bottom: 1em">
-					<h5>Good Job!</h5>
+				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%; margin-bottom: 0.3em">
+					<h3 style = "color: #5da423; margin-top: 0.5em">Good Job!</h3>
+				</div>
+				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-bottom: 1em; width: 100%">
+					<h5 style = "font-weight: normal; color: #5da423">+ <b><%= points %></b> points</h5>
 				</div>
 				<div class = "tweleve columns mobile-six" style = "text-align: center">
-					<h6><%= source.get('description') %></h6>
+					<h6 style = "font-weight: normal; font-size: 1.2em"><%= quiz_q.get('question').replace('______', '<b>' + quiz_q.get('correct') + '</b>') %></h6>
 				</div>
 				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
 					<% var urls = source.get('url').split(' '); %>
 					<% for (i = 0; i < urls.length; i++) { %>
-						<a href = "<%= urls[i] %>"><%= urls[i] %></a>
+						<b><%= 'Source: ' %></b>
+						<a href = "<%= urls[i] %>" target = "_blank" style = "color: #505050"><u><%= urls[i] %></u></a>
 					<% } %>
 				</div>
-				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; margin-bottom: 1em; width: 100%">
-					<h5 style = "font-weight: normal">You got <b><%= points %></b> points</h5>
-				</div>
+				<button id = "next" type = "button" class = "radius dark button" style = "width: 100%; margin-top: 1.5em">Next</button>
 				<div class = "twelve columns mobile-six" style = "text-align: center">
 					<% var num = Math.floor(Math.random() * 17); %>
 					<img src = '/assets/win<%= num + 1 %>.png' width = "90px">
@@ -30,19 +32,24 @@
 		<div class = "eight columns centered mobile-six">
 			<div class = "radius row panel" style = "margin-top: 0.5em">
 				<div class = "twelve columns mobile-six" id = "progress_bars" style = "margin-bottom: 2em; margin-top: -2em"></div>
-				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%; margin-bottom: 1em">
-					<h5>Maybe Next Time...</h5>
+				<div class = "tweleve columns mobile-six" style = "text-align: center; width: 100%; margin-bottom: 0.3em">
+					<h5 style = "color: #c60f13; margin-top: 0.5em">Maybe Next Time...</h5>
+				</div>
+				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-bottom: 1em; width: 100%">
+					<h5 style = "font-weight: normal; color: #c60f13">+ <b>0</b> points</h5>
 				</div>
 				</br></br>
 				<div class = "tweleve columns mobile-six" style = "text-align: center">
-					<h6><%= source.get('description') %></h6>
+					<h6 style = "font-weight: normal; font-size: 1.2em"><%= quiz_q.get('question').replace('______', '<b>' + quiz_q.get('correct') + '</b>') %></h6>
 				</div>
 				<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
 					<% var urls = source.get('url').split(' '); %>
 					<% for (i = 0; i < urls.length; i++) { %>
-						<a href = "<%= urls[i] %>"><%= urls[i] %></a>
+						<b><%= 'Source: ' %></b>
+						<a href = "<%= urls[i] %>" target = "_blank" style = "color: #505050"><u><%= urls[i] %></u></a>
 					<% } %>
 				</div>
+				<button id = "next" type = "button" class = "radius dark button" style = "width: 100%; margin-top: 1.5em">Next</button>
 			</div>
 		</div>
 	</div>

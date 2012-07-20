@@ -19,6 +19,6 @@ SongPop.Views.QuizTasksQuizTopic = Backbone.View.extend({
 	},
 	
 	studyGuide: function() {
-		alert("Only nubs study!");
+		alert("Coming Soon!");
 	}
 });

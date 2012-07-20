@@ -1,13 +1,14 @@
 <div class = "row">
 	<div class = "eight columns centered mobile-six">
 		<div class = "radius row panel" style = "margin-top: 0.5em">
-			<div class = "tweleve columns mobile-six" style = "text-align: center">
-				<h6><%= source.get('description') %></h6>
+			<div class = "twelve columns mobile-six">
+				<h6 style = "text-align: center"><%= source.get('description') %></h6>
 			</div>
 			<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
 				<% var urls = source.get('url').split(' '); %>
 				<% for (i = 0; i < urls.length; i++) { %>
-					<a href = "<%= urls[i] %>"><%= urls[i] %></a>
+					<b><%= 'Source: ' %></b>
+					<a href = "<%= urls[i] %>" target = "_blank" style = "color: #505050"><u><%= urls[i] %></u></a>
 				<% } %>
 			</div>
 			<div class = "tweleve columns mobile-six" style = "width: 100%; margin-top: 2em">

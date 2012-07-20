@@ -24,14 +24,15 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 			my_points: this.my_points,
 			player_points: this.player_points ,
 			player: this.player,
-			me: this.me
+			me: this.me,
+			quiz_qs: this.quiz_qs
 		}));
 		return this;
 	},
 	
 	setVars: function() {
 		var is_challenge, topic, reason, my_points, player_points, challenge, me, player, quiz_tasks;
-		var questions = [], my_quiz = [], player_quiz = [];
+		var questions = [], my_quiz = [], player_quiz = [], quiz_qs = [];
 		challenge = this.options.challenge;
 		topic = this.options.topics.where({id: challenge.get('t_id')})[0];
 		reason = this.options.reasons.where({id: challenge.get('reason_id')})[0];
@@ -39,6 +40,9 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 		me = this.options.current_user;
 		quiz_tasks = this.options.quiz_tasks;
 		
+		for ( i = 0; i < questions.length; i++) {
+			quiz_qs.push(questions[i].get('question').replace('______', '<b>' + questions[i].get('correct') + '</b>'));
+		}
 		if (challenge.get('challenger_id') === me.get('id')) {
 			is_challenge = true;
 			my_points = challenge.get('challenger_score');
@@ -68,6 +72,7 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 		this.topic = topic;
 		this.reason = reason;
 		this.questions = questions;
+		this.quiz_qs = quiz_qs;
 		if (!is_challenge) {
 			this.new_challenge = this.options.challenges.create();
 			this.updateChallenge(true);

@@ -2,16 +2,16 @@
 	<div class = "eight columns centered mobile-six">
 		<div class = "radius row panel" style = "margin-top: 0.5em">
 			<div class = "twelve columns mobile-six" id = "progress_bars" style = "margin-top: -2em"></div>
-			<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2.5em">
-				<h5><%= quiz_q.get('question') %></h5>
+			<div class = "tweleve columns mobile-six" style = "text-align: left; margin-top: 3em">
+				<div style = "font-size: 1.2em"><%= quiz_q.get('question') %></div>
 			</div>
 			<% var time = 10; %>
 
 			<div class = "three columns mobile-one"></div>
-			<div class = "six columns mobile-four" style = "margin-top: 1.5em">
+			<div class = "six columns mobile-four hide" style = "margin-top: 1em" id = "the_timer">
 				<div class = "meter-container"></div>
 				<div id = "meter" class = "meter-bar-dark" style = "width: 100%"></div>
-				<div id = "time" class = "meter-text"><%= time + ' s' %></div>
+				<div id = "time" class = "meter-text"></div>
 			</div>
 			<div class = "three columns mobile-one"></div>
 			<div class = "twelve columns mobile-six">
@@ -19,12 +19,12 @@
 			</div>
 			<div class = "tweleve columns mobile-six" style = "width: 100%; margin-top: 2em">
 				<% for (i = 0; i < answers.length; i++) { %>
-					<button id = "answer<%= i %>" value = "<%= i %>" type = "button" class = "radius dark button hide" style = "width: 100%">
-						<div class = "one columns mobile-one"></div>
-						<div class = "ten columns mobile-four">
-							<%= answers[i] %>
+					<button id = "answer<%= i %>" value = "<%= i %>" type = "button" class = "radius dark button hide" style = "width: 100%; padding: 0.5em; font-weight: normal">
+						<div class = "one mobile-one columns"></div>
+						<div class = "ten columns mobile-four" style = "padding: 0">
+							<%= answers[i].charAt(0).toUpperCase() + answers[i].slice(1) %>
 						</div>
-						<div id = "pic" style = "height: 25px"></div>
+						<div id = "pic" style = "height: 25px; float: right"></div>
 					</button>
 				<% } %>
 			</div>

@@ -3,7 +3,7 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 	template: JST['quiz_tasks/quiz_question_answered'],
 	
 	events: {
-
+		'click #next' : 'seeWhatsNext'
 	},
 	
 	render: function() {
@@ -39,7 +39,7 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 		} else {
 			correct = false;
 		}
-		points = Math.round(500 + (10 - quiz_task.get('time')) * 450);
+		points = Math.round(500 + (12.5 - quiz_task.get('time')) * 160);
 		if (quiz_qs.where({reason_id: challenge.get('reason_id')}).length === quiz_tasks.where({
 																					user_id: current_user.get('id'), 
 																					t_id: challenge.get('t_id'), 
@@ -48,10 +48,8 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 			last_q = true;
 			challenge.set({is_ready: true});
 			challenge.save();
-			setTimeout(function() {that.quizResults()}, 3000);
 		} else {
 			last_q = false;
-			setTimeout(function() {that.nextQuestion()}, 3000);
 		}
 		
 		this.quiz_q = quiz_q;
@@ -98,6 +96,14 @@ SongPop.Views.QuizTasksQuizQuestionAnswered = Backbone.View.extend({
 			} else {
 				$('#bar_' + String(i + 1)).html(JST['quiz_tasks/empty_meter']({time: i + 1}));
 			}
+		}
+	}, 
+	
+	seeWhatsNext: function() {
+		if(this.last_q) {
+			this.quizResults();
+		} else {
+			this.nextQuestion();
 		}
 	}
 });

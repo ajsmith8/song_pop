@@ -27,7 +27,7 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 		this.is_answered = true;
 		var challenge = this.options.challenge;
 		var current_user = this.options.current_user;
-		var time = Math.round((10 - this.time) * 10) / 10;
+		var time = Math.round((12.5 - this.time) * 10) / 10;
 		
 		this.assignAnswer(this.answers[num]);
 		this.options.quiz_tasks.create({
@@ -41,10 +41,10 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 		});
 		if (this.answer === 'correct') {
 			if (current_user.get('id') === challenge.get('user_id')) {
-				challenge.set({user_score: challenge.get('user_score') + Math.round(500 + (10 - time) * 450)});
+				challenge.set({user_score: challenge.get('user_score') + Math.round(500 + (12.5 - time) * 160)});
 				challenge.save();
 			} else {
-				challenge.set({challenger_score: challenge.get('challenger_score') + Math.round(500 + (10 - time) * 450)});
+				challenge.set({challenger_score: challenge.get('challenger_score') + Math.round(500 + (12.5 - time) * 160)});
 				challenge.save();
 			}
 		}
@@ -128,13 +128,13 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 
 		if (!running) { 
 			running = true;
-			count = 100;
-			that.time = 10;
+			count = 125;
+			that.time = 12.5;
 			inter_count = 0;
 			
 			function run() {
 				if (current_user.get('id') === challenge.get('user_id')) {
-					if (Math.round((10 - that.time) * 10) / 10 === that.player_time) {
+					if (Math.round((12.5 - that.time) * 10) / 10 === that.player_time) {
 						that.showPlayer();
 					}
 				}
@@ -144,13 +144,12 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 				}
 				count = count - 1;
 				that.time = that.time - 0.1;
-				$('#meter').css('width', count + "%");
-				$('#time').text(Math.round(that.time * 10) / 10 + " s");
+				$('#meter').css('width', Math.round((count / 1.25) * 100) / 100 + "%");
 				if (that.stopTimer(count)) {
 					clearInterval(inter);
 					running = false;
 					if (current_user.get('id') === challenge.get('user_id')) {
-						if (Math.round((10 - that.time) * 10) / 10 === that.player_time) {
+						if (Math.round((12.5 - that.time) * 10) / 10 === that.player_time) {
 							that.showPlayer();
 						}
 					}
@@ -260,14 +259,16 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 	setTimeInterval: function(num) {
 		var inter = [];
 		for(i = num; i > 1; i--) {
-			inter.push((Math.round((10 / num) * 10) / 10) * (i - 1));
+			inter.push((Math.round((12.5 / num) * 10) / 10) * (i - 1));
 		}
 		this.interval = inter;
 	},
 	
 	showAnswers: function() {
+		var that = this;
 		var buttons = $('#page').find('button');
-
+		
+		$('#the_timer').removeClass('hide');
 		for (i = 0; i < buttons.length; i++) {
 			if ($(buttons[i]).hasClass('hide')) {
 				$(buttons[i]).removeClass('hide');
@@ -275,6 +276,6 @@ SongPop.Views.QuizTasksQuizQuestion = Backbone.View.extend({
 				$(buttons[i]).addClass('hide');
 			}
 		}
-		this.timer();
+		setTimeout(function() {that.timer()}, 1000);
 	}
 });
