@@ -2,17 +2,17 @@
 	<div class = "eight columns centered mobile-six">
 		<div class = "radius row panel" style = "margin-top: 0.5em">
 			<h4 style = "text-align: center"><%= topic.get('title') %></h4>
-			<div class = "tweleve columns mobile-six" style = "text-align: left">
+			<div class = "twelve columns mobile-six" style = "text-align: left">
 				<h6 style = "font-weight: normal"><%= topic.get('description') %></h6>
 			</div>
-			<div class = "tweleve columns mobile-six" style = "overflow: hidden; text-overflow: ellipsis; margin-top: 2em">
+			<div class = "twelve columns mobile-six" style = "overflow: hidden; text-overflow: ellipsis; margin-top: 2em">
 				<% var urls = topic.get('source_url').split(' '); %>
 				<% for (i = 0; i < urls.length; i++) { %>
 					<b><%= 'Source: ' %></b>
 					<a href = "<%= urls[i] %>" target = "_blank" style = "color: #505050"><u><%= urls[i] %></u></a>
 				<% } %>
 			</div>
-			<div class = "tweleve columns mobile-six" style = "width: 100%; margin-top: 2em">
+			<div class = "twelve columns mobile-six" style = "width: 100%; margin-top: 2em">
 				<button id = "next" type = "button" class = "radius dark button" style = "width: 100%">Next</button>
 				<button id = "study_guide" type = "button" class = "radius primary button" style = "width: 100%; display:none">Study Guide</button>
 			</div>

@@ -4,14 +4,14 @@
 			<div class = "twelve columns mobile-six">
 				<h6 style = "text-align: center"><%= source.get('description') %></h6>
 			</div>
-			<div class = "tweleve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
+			<div class = "twelve columns mobile-six" style = "text-align: center; margin-top: 2em; overflow: hidden">
 				<% var urls = source.get('url').split(' '); %>
 				<% for (i = 0; i < urls.length; i++) { %>
 					<b><%= 'Source: ' %></b>
 					<a href = "<%= urls[i] %>" target = "_blank" style = "color: #505050"><u><%= urls[i] %></u></a>
 				<% } %>
 			</div>
-			<div class = "tweleve columns mobile-six" style = "width: 100%; margin-top: 2em">
+			<div class = "twelve columns mobile-six" style = "width: 100%; margin-top: 2em">
 				<button id = "back" type = "button" class = "radius dark button" style = "width: 100%">Back</button>
 				<button id = "dispute" type = "button" class = "radius primary button" style = "width: 100%">Dispute Source</button>
 			</div>
