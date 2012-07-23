@@ -3,7 +3,7 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	template: JST['quiz_tasks/quiz_results'],
 	
 	events: {
-		'click #send_challenge' : 'sendChallenge',
+		'click #send_challenge' : 'sendChallengeTemp',
 		'click #new_challenge' : 'newChallenge',
 		'click #source0' : 'sourceZero',
 		'click #source1' : 'sourceOne',
@@ -137,5 +137,9 @@ SongPop.Views.QuizTasksQuizResults = Backbone.View.extend({
 	
 	showSource: function(num) {
 		Backbone.history.navigate('source/' + this.questions[num].get('source_id'), true);
+	},
+	
+	sendChallengeTemp: function() {
+		Backbone.history.navigate('', true);
 	}
 });

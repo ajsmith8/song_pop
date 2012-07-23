@@ -5,7 +5,7 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 	events: {
 		'click #play' 	: 'quizTopic',
 		'click #create' : 'createChallenge',
-		'click #nudge' 	: 'nudge'
+		'click #nudge' 	: 'nudgeTemp'
 	},
 	
 	render: function() {
@@ -108,5 +108,9 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
         }
 		FB.ui(obj, callback);
 		this.render();
+	},
+	
+	nudgeTemp: function() {
+		alert('temporarily disabled');
 	}
 });
