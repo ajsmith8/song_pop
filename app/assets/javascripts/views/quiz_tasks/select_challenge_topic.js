@@ -13,9 +13,9 @@ SongPop.Views.QuizTasksSelectChallengeTopic = Backbone.View.extend({
 		return this;
 	},
 	
-	selectChallengeTopic: function() {
+	selectChallengeTopic: function(e) {
 		var challenge = this.options.challenge;
-		var topic = this.options.topics.where({id: parseInt($(event.target).val())})[0];
+		var topic = this.options.topics.where({id: parseInt($(e.target).val())})[0];
 		var reasons = _.shuffle(this.options.reasons.where({t_id: topic.get('id')}));
 		var challenges = this.options.challenges;
 		var reason;

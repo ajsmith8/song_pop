@@ -19,8 +19,8 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 		return this;
 	},
 	
-	quizTopic: function() {
-		var challenge_id = parseInt($(event.target).val());
+	quizTopic: function(e) {
+		var challenge_id = parseInt($(e.target).val());
 		Backbone.history.navigate('t/' + challenge_id, true);
 	},
 	
@@ -82,10 +82,10 @@ SongPop.Views.QuizTasksHome = Backbone.View.extend({
 		array.push({challenge: challenge, my_score: my_wins, opponent_score: player_wins});
 	},
 	
-	nudge: function() {
+	nudge: function(e) {
 		var users = this.options.users;
 		var challenges = this.options.challenges;
-		var challenge = this.options.challenges.where({id: parseInt($(event.target).val())})[0];
+		var challenge = this.options.challenges.where({id: parseInt($(e.target).val())})[0];
 		var to_user = users.where({id: challenge.get('user_id')})[0];
 		var currentTime = new Date();
 		var obj = { 

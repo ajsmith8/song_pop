@@ -16,8 +16,8 @@ SongPop.Views.QuizTasksCreateChallenge = Backbone.View.extend({
 		return this;
 	},
 	
-	challengeFriend: function() {
-		var friend = this.options.friends[parseInt($(event.target).val())];
+	challengeFriend: function(e) {
+		var friend = this.options.friends[parseInt($(e.target).val())];
 		var current_user = this.options.current_user;
 		var users = this.options.users;
 		var challenges = this.options.challenges;
